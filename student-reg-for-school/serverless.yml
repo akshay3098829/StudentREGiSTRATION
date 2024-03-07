@@ -1,0 +1,74 @@
+org: akshaymohan
+app: studentreg
+service: student-reg-for-school
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.8
+  region: ap-south-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - states:*
+        - dynamodb:*
+        - sqs:*
+        - s3:*
+      Resource: "*"  
+resources:
+  Resources:
+    StudentThrottleQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "student_reg_throttle"        
+
+functions:
+  apigateway_endpoint:
+    handler: src/lambdas/apigateway.lambda_handler
+    name : "student_reg_gateway_lambda" 
+    description: "API gateway handler for Student details."
+    memorySize: 1024 # optional, in MB, default is 1024
+    timeout: 25 # optional, in seconds, default is 6
+    events:
+      - http:
+          path: /students/registration/details
+          method: post  
+  student_details_from_queue_fn:
+    handler: src/lambdas/studentdetailsfromqueue.lambda_handler
+    name: "student_details_from_queue_fn"
+    description: "Student details from the queue."
+    memorySize: 2048
+    timeout: 10  # 3 minutes
+    events:
+      - sqs:
+          arn: arn:aws:sqs:ap-south-1:533267073332:student_reg_throttle
+          maximumConcurrency: 2
+          batchSize: 10
+          maximumBatchingWindow: 10
+          functionResponseType: ReportBatchItemFailures
+    environment:
+      STMachine_SM_ARN:
+         Ref:StateMachineSF
+  admission-process_fn:
+     handler: src/lambdas/stepfunction_lambda_handler.lambda_handler
+     name: "admission-process-lambda"
+     description: "stepfunction lambda"
+     memorySize: 2048
+     timeout: 10  # 3 minutes
+stepFunctions:
+  stateMachines:
+    STMachineSM:
+      id: StateMachineSF
+      name: student-registration-state-machine
+      definition: ${file(src/resources/stepfn.json)}
+        # StartAt: StudentAdmission
+        # States:
+        #   StudentAdmission:
+        #     Type: Task
+        #     Resource: arn:aws:lambda:ap-south-1:533267073332:function:admission-process-lambda
+        #     End: true
+
+         
+plugins:
+  - serverless-step-functions
