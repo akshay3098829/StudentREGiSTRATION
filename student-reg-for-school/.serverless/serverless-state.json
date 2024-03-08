@@ -282,7 +282,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/student-reg-for-school/dev/1709815754563-2024-03-07T12:49:14.563Z/student-reg-for-school.zip"
+                "S3Key": "serverless/student-reg-for-school/dev/1709873124935-2024-03-08T04:45:24.935Z/student-reg-for-school.zip"
               },
               "Handler": "s_apigateway_endpoint.handler",
               "Runtime": "python3.8",
@@ -308,7 +308,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/student-reg-for-school/dev/1709815754563-2024-03-07T12:49:14.563Z/student-reg-for-school.zip"
+                "S3Key": "serverless/student-reg-for-school/dev/1709873124935-2024-03-08T04:45:24.935Z/student-reg-for-school.zip"
               },
               "Handler": "s_student_details_from_queue_fn.handler",
               "Runtime": "python3.8",
@@ -318,7 +318,9 @@
               "Description": "Student details from the queue.",
               "Environment": {
                 "Variables": {
-                  "STMachine_SM_ARN": "Ref:StateMachineSF"
+                  "STMachine_SM_ARN": {
+                    "Ref": "StateMachineSF"
+                  }
                 }
               },
               "Role": {
@@ -339,7 +341,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/student-reg-for-school/dev/1709815754563-2024-03-07T12:49:14.563Z/student-reg-for-school.zip"
+                "S3Key": "serverless/student-reg-for-school/dev/1709873124935-2024-03-08T04:45:24.935Z/student-reg-for-school.zip"
               },
               "Handler": "s_admission_process_fn.handler",
               "Runtime": "python3.8",
@@ -358,36 +360,36 @@
               "AdmissionDashprocessUnderscorefnLogGroup"
             ]
           },
-          "ApigatewayUnderscoreendpointLambdaVersionBHR4Xr8cIjGiB1CA8vrmfuC85qsmiB50BLlsjifVnIo": {
+          "ApigatewayUnderscoreendpointLambdaVersion7XDzPJzRiPiAEhErPKjljFTFajQ1OgQCCQUdWWymc": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApigatewayUnderscoreendpointLambdaFunction"
               },
-              "CodeSha256": "rfaFeQadt365exXB07ZPOLFTDzHtmi43OhzvIvZlO40=",
+              "CodeSha256": "t5E1zZgj9h42quOwOI6S6miPmfF/xyDZQTA545CQ9NU=",
               "Description": "API gateway handler for Student details."
             }
           },
-          "StudentUnderscoredetailsUnderscorefromUnderscorequeueUnderscorefnLambdaVersionpMgKKIW3ycXAzwskl8ooiWjBIQ9ESzIy1mxQK69bbgA": {
+          "StudentUnderscoredetailsUnderscorefromUnderscorequeueUnderscorefnLambdaVersionCt5qgfZsoRrYQ8ijVUAih1pRFOvi51ManvBRCUbFY": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "StudentUnderscoredetailsUnderscorefromUnderscorequeueUnderscorefnLambdaFunction"
               },
-              "CodeSha256": "rfaFeQadt365exXB07ZPOLFTDzHtmi43OhzvIvZlO40=",
+              "CodeSha256": "t5E1zZgj9h42quOwOI6S6miPmfF/xyDZQTA545CQ9NU=",
               "Description": "Student details from the queue."
             }
           },
-          "AdmissionDashprocessUnderscorefnLambdaVersionP8RFgHy5qBi7bCMVbC90jPkBYx0fa4wOCewJBEumJ0": {
+          "AdmissionDashprocessUnderscorefnLambdaVersioneWrEQ88qVLQnLY8o2HRa5DmcOVlANHrUAo8xAjEk": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AdmissionDashprocessUnderscorefnLambdaFunction"
               },
-              "CodeSha256": "rfaFeQadt365exXB07ZPOLFTDzHtmi43OhzvIvZlO40=",
+              "CodeSha256": "t5E1zZgj9h42quOwOI6S6miPmfF/xyDZQTA545CQ9NU=",
               "Description": "stepfunction lambda"
             }
           },
@@ -543,7 +545,7 @@
               "ApigatewayUnderscoreendpointLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1709815743762": {
+          "ApiGatewayDeployment1709873107484": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -701,7 +703,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/student-reg-for-school/dev/1709815754563-2024-03-07T12:49:14.563Z/custom-resources.zip"
+                "S3Key": "serverless/student-reg-for-school/dev/1709873124935-2024-03-08T04:45:24.935Z/custom-resources.zip"
               },
               "FunctionName": "student-reg-for-school-dev-custom-resource-apigw-cw-role",
               "Handler": "api-gateway-cloud-watch-role/handler.handler",
@@ -773,7 +775,7 @@
           "ApigatewayUnderscoreendpointLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApigatewayUnderscoreendpointLambdaVersionBHR4Xr8cIjGiB1CA8vrmfuC85qsmiB50BLlsjifVnIo"
+              "Ref": "ApigatewayUnderscoreendpointLambdaVersion7XDzPJzRiPiAEhErPKjljFTFajQ1OgQCCQUdWWymc"
             },
             "Export": {
               "Name": "sls-student-reg-for-school-dev-ApigatewayUnderscoreendpointLambdaFunctionQualifiedArn"
@@ -782,7 +784,7 @@
           "StudentUnderscoredetailsUnderscorefromUnderscorequeueUnderscorefnLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "StudentUnderscoredetailsUnderscorefromUnderscorequeueUnderscorefnLambdaVersionpMgKKIW3ycXAzwskl8ooiWjBIQ9ESzIy1mxQK69bbgA"
+              "Ref": "StudentUnderscoredetailsUnderscorefromUnderscorequeueUnderscorefnLambdaVersionCt5qgfZsoRrYQ8ijVUAih1pRFOvi51ManvBRCUbFY"
             },
             "Export": {
               "Name": "sls-student-reg-for-school-dev-StudentUnderscoredetailsUnderscorefromUnderscorequeueUnderscorefnLambdaFunctionQualifiedArn"
@@ -791,7 +793,7 @@
           "AdmissionDashprocessUnderscorefnLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AdmissionDashprocessUnderscorefnLambdaVersionP8RFgHy5qBi7bCMVbC90jPkBYx0fa4wOCewJBEumJ0"
+              "Ref": "AdmissionDashprocessUnderscorefnLambdaVersioneWrEQ88qVLQnLY8o2HRa5DmcOVlANHrUAo8xAjEk"
             },
             "Export": {
               "Name": "sls-student-reg-for-school-dev-AdmissionDashprocessUnderscorefnLambdaFunctionQualifiedArn"
@@ -947,7 +949,7 @@
         "memory": 1024,
         "runtime": "python3.8",
         "vpc": {},
-        "versionLogicalId": "ApigatewayUnderscoreendpointLambdaVersionBHR4Xr8cIjGiB1CA8vrmfuC85qsmiB50BLlsjifVnIo"
+        "versionLogicalId": "ApigatewayUnderscoreendpointLambdaVersion7XDzPJzRiPiAEhErPKjljFTFajQ1OgQCCQUdWWymc"
       },
       "student_details_from_queue_fn": {
         "handler": "s_student_details_from_queue_fn.handler",
@@ -967,13 +969,15 @@
           }
         ],
         "environment": {
-          "STMachine_SM_ARN": "Ref:StateMachineSF"
+          "STMachine_SM_ARN": {
+            "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"StudentUnderscoredetailsUnderscorefromUnderscorequeueUnderscorefnLambdaFunction\"][\"Properties\"][\"Environment\"][\"Variables\"][\"STMachine_SM_ARN\"]"
+          }
         },
         "package": {},
         "memory": 2048,
         "runtime": "python3.8",
         "vpc": {},
-        "versionLogicalId": "StudentUnderscoredetailsUnderscorefromUnderscorequeueUnderscorefnLambdaVersionpMgKKIW3ycXAzwskl8ooiWjBIQ9ESzIy1mxQK69bbgA"
+        "versionLogicalId": "StudentUnderscoredetailsUnderscorefromUnderscorequeueUnderscorefnLambdaVersionCt5qgfZsoRrYQ8ijVUAih1pRFOvi51ManvBRCUbFY"
       },
       "admission-process_fn": {
         "handler": "s_admission_process_fn.handler",
@@ -986,7 +990,7 @@
         "memory": 2048,
         "runtime": "python3.8",
         "vpc": {},
-        "versionLogicalId": "AdmissionDashprocessUnderscorefnLambdaVersionP8RFgHy5qBi7bCMVbC90jPkBYx0fa4wOCewJBEumJ0"
+        "versionLogicalId": "AdmissionDashprocessUnderscorefnLambdaVersioneWrEQ88qVLQnLY8o2HRa5DmcOVlANHrUAo8xAjEk"
       }
     },
     "resources": {
@@ -1059,7 +1063,7 @@
     "artifact": "/home/akshaymohan/Desktop/StudentReg/student-reg-for-school/.serverless/student-reg-for-school.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/student-reg-for-school/dev/1709815754563-2024-03-07T12:49:14.563Z",
+    "artifactDirectoryName": "serverless/student-reg-for-school/dev/1709873124935-2024-03-08T04:45:24.935Z",
     "artifact": "student-reg-for-school.zip"
   }
 }
