@@ -265,7 +265,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/student-reg-for-school/dev/1709873124935-2024-03-08T04:45:24.935Z/student-reg-for-school.zip"
+          "S3Key": "serverless/student-reg-for-school/dev/1710142593067-2024-03-11T07:36:33.067Z/student-reg-for-school.zip"
         },
         "Handler": "s_apigateway_endpoint.handler",
         "Runtime": "python3.8",
@@ -273,6 +273,11 @@
         "MemorySize": 1024,
         "Timeout": 25,
         "Description": "API gateway handler for Student details.",
+        "Environment": {
+          "Variables": {
+            "STUDENT_TABLE_NAME": "studentregistration"
+          }
+        },
         "Role": {
           "Fn::GetAtt": [
             "IamRoleLambdaExecution",
@@ -291,7 +296,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/student-reg-for-school/dev/1709873124935-2024-03-08T04:45:24.935Z/student-reg-for-school.zip"
+          "S3Key": "serverless/student-reg-for-school/dev/1710142593067-2024-03-11T07:36:33.067Z/student-reg-for-school.zip"
         },
         "Handler": "s_student_details_from_queue_fn.handler",
         "Runtime": "python3.8",
@@ -324,7 +329,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/student-reg-for-school/dev/1709873124935-2024-03-08T04:45:24.935Z/student-reg-for-school.zip"
+          "S3Key": "serverless/student-reg-for-school/dev/1710142593067-2024-03-11T07:36:33.067Z/student-reg-for-school.zip"
         },
         "Handler": "s_admission_process_fn.handler",
         "Runtime": "python3.8",
@@ -332,6 +337,11 @@
         "MemorySize": 2048,
         "Timeout": 10,
         "Description": "stepfunction lambda",
+        "Environment": {
+          "Variables": {
+            "STUDENT_TABLE_NAME": "studentregistration"
+          }
+        },
         "Role": {
           "Fn::GetAtt": [
             "IamRoleLambdaExecution",
@@ -343,36 +353,36 @@
         "AdmissionDashprocessUnderscorefnLogGroup"
       ]
     },
-    "ApigatewayUnderscoreendpointLambdaVersion7XDzPJzRiPiAEhErPKjljFTFajQ1OgQCCQUdWWymc": {
+    "ApigatewayUnderscoreendpointLambdaVersionJTXbuOrsZnTPSKNlvCxnst4loIpX1ZfSwGbbl1tVQ": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ApigatewayUnderscoreendpointLambdaFunction"
         },
-        "CodeSha256": "t5E1zZgj9h42quOwOI6S6miPmfF/xyDZQTA545CQ9NU=",
+        "CodeSha256": "s8kRI6QGoWqBO6PSxYcMjzqZGfhZSNRb1lZYUMs8a1I=",
         "Description": "API gateway handler for Student details."
       }
     },
-    "StudentUnderscoredetailsUnderscorefromUnderscorequeueUnderscorefnLambdaVersionCt5qgfZsoRrYQ8ijVUAih1pRFOvi51ManvBRCUbFY": {
+    "StudentUnderscoredetailsUnderscorefromUnderscorequeueUnderscorefnLambdaVersionsu2JXdgjqISMpMzXcSjFU5rKbFEZGI7J69y4nnF4Y": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "StudentUnderscoredetailsUnderscorefromUnderscorequeueUnderscorefnLambdaFunction"
         },
-        "CodeSha256": "t5E1zZgj9h42quOwOI6S6miPmfF/xyDZQTA545CQ9NU=",
+        "CodeSha256": "s8kRI6QGoWqBO6PSxYcMjzqZGfhZSNRb1lZYUMs8a1I=",
         "Description": "Student details from the queue."
       }
     },
-    "AdmissionDashprocessUnderscorefnLambdaVersioneWrEQ88qVLQnLY8o2HRa5DmcOVlANHrUAo8xAjEk": {
+    "AdmissionDashprocessUnderscorefnLambdaVersionKw6Y1p5DiLaa3gcnXyHLVe7udVpnbGRo4wLX2QNoxw": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AdmissionDashprocessUnderscorefnLambdaFunction"
         },
-        "CodeSha256": "t5E1zZgj9h42quOwOI6S6miPmfF/xyDZQTA545CQ9NU=",
+        "CodeSha256": "s8kRI6QGoWqBO6PSxYcMjzqZGfhZSNRb1lZYUMs8a1I=",
         "Description": "stepfunction lambda"
       }
     },
@@ -418,7 +428,7 @@
     "StateMachineSF": {
       "Type": "AWS::StepFunctions::StateMachine",
       "Properties": {
-        "DefinitionString": "{\n  \"Comment\": \"Simple State Machine with One Lambda\",\n  \"StartAt\": \"InvokeTestLambda\",\n  \"States\": {\n    \"InvokeTestLambda\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke\",\n      \"Parameters\": {\n        \"Payload.$\": \"$\",\n        \"FunctionName\": \"arn:aws:lambda:ap-south-1:533267073332:function:admission-process-lambda\"\n      },\n      \"End\": true\n    }\n  }\n}",
+        "DefinitionString": "{\n  \"Comment\": \"Simple State Machine with One Lambda\",\n  \"StartAt\": \"InvokeTestLambda\",\n  \"States\": {\n    \"InvokeTestLambda\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke\",\n      \"Parameters\": {\n        \"Payload.$\": \"$\",\n        \"FunctionName\": \"arn:aws:lambda:ap-south-1:533267073332:function:admission-process-lambda\"\n      },\n      \"ResultPath\": \"$.dob_result\",\n      \"End\": true\n    }\n  }\n}",
         "RoleArn": {
           "Fn::GetAtt": [
             "StateMachineSFRole",
@@ -528,7 +538,7 @@
         "ApigatewayUnderscoreendpointLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1709873107484": {
+    "ApiGatewayDeployment1710142584147": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -686,7 +696,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/student-reg-for-school/dev/1709873124935-2024-03-08T04:45:24.935Z/custom-resources.zip"
+          "S3Key": "serverless/student-reg-for-school/dev/1710142593067-2024-03-11T07:36:33.067Z/custom-resources.zip"
         },
         "FunctionName": "student-reg-for-school-dev-custom-resource-apigw-cw-role",
         "Handler": "api-gateway-cloud-watch-role/handler.handler",
@@ -733,6 +743,25 @@
       "Properties": {
         "QueueName": "student_reg_throttle"
       }
+    },
+    "StudentsTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "TableName": "studentregistration",
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "student_id",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "student_id",
+            "KeyType": "HASH"
+          }
+        ],
+        "BillingMode": "PAY_PER_REQUEST"
+      }
     }
   },
   "Outputs": {
@@ -758,7 +787,7 @@
     "ApigatewayUnderscoreendpointLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ApigatewayUnderscoreendpointLambdaVersion7XDzPJzRiPiAEhErPKjljFTFajQ1OgQCCQUdWWymc"
+        "Ref": "ApigatewayUnderscoreendpointLambdaVersionJTXbuOrsZnTPSKNlvCxnst4loIpX1ZfSwGbbl1tVQ"
       },
       "Export": {
         "Name": "sls-student-reg-for-school-dev-ApigatewayUnderscoreendpointLambdaFunctionQualifiedArn"
@@ -767,7 +796,7 @@
     "StudentUnderscoredetailsUnderscorefromUnderscorequeueUnderscorefnLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "StudentUnderscoredetailsUnderscorefromUnderscorequeueUnderscorefnLambdaVersionCt5qgfZsoRrYQ8ijVUAih1pRFOvi51ManvBRCUbFY"
+        "Ref": "StudentUnderscoredetailsUnderscorefromUnderscorequeueUnderscorefnLambdaVersionsu2JXdgjqISMpMzXcSjFU5rKbFEZGI7J69y4nnF4Y"
       },
       "Export": {
         "Name": "sls-student-reg-for-school-dev-StudentUnderscoredetailsUnderscorefromUnderscorequeueUnderscorefnLambdaFunctionQualifiedArn"
@@ -776,7 +805,7 @@
     "AdmissionDashprocessUnderscorefnLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AdmissionDashprocessUnderscorefnLambdaVersioneWrEQ88qVLQnLY8o2HRa5DmcOVlANHrUAo8xAjEk"
+        "Ref": "AdmissionDashprocessUnderscorefnLambdaVersionKw6Y1p5DiLaa3gcnXyHLVe7udVpnbGRo4wLX2QNoxw"
       },
       "Export": {
         "Name": "sls-student-reg-for-school-dev-AdmissionDashprocessUnderscorefnLambdaFunctionQualifiedArn"

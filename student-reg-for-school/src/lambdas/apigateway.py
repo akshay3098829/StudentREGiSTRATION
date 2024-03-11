@@ -6,6 +6,7 @@ from datetime import timedelta, datetime, timezone
 import uuid
 from src.utils.validation import RequestValidator, ValidationError
 from src.utils.awsutils import send_sqs_message
+from src.utils.tracker_utils import create_tracker,update_tracker
 STUDENT_REG_QUEUE = os.environ.get(
     "STUDENT_THROTTLING_QUEUE", "student_reg_throttle"
 )
@@ -24,10 +25,22 @@ def student_registration(event: Dict[str, Any]) -> Dict[str, Any]:
             "errorDetails": [e.error for e in errors],
         }
         return format_response(HTTPStatus.BAD_REQUEST,error_details)
+    
     now: datetime = datetime.now(tz=timezone.utc)   
     dt: str = (now + timedelta(hours=UTC_OFFSET)).strftime(INSTANCE_DATE_FORMAT)
     student_id: str = f"{dt}-{str(uuid.uuid4())}" 
     request["student_id"]=student_id
+    firstname,lastname,gender,dob,age,std,phone=request["firstname"],request["lastname"],request["gender"],request["dob"],request["age"],request["std"],request["phone"]
+    create_tracker(
+        student_id=student_id,
+        firstname = firstname,
+        lastname = lastname,
+        gender = gender,
+        dob = dob,
+        age = age,
+        std = std,
+        phone = phone
+    )
     send_msg_to_queue(request)
     return format_response(
         HTTPStatus.OK,

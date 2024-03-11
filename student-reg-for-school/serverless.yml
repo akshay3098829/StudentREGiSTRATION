@@ -4,6 +4,10 @@ service: student-reg-for-school
 
 frameworkVersion: '3'
 
+# custom:
+#   STUDENT_TABLE_NAME: "studentregistration"
+#   STUDENT_TABLE_ARN: "arn:aws:dynamodb:ap-south-1:322923892666:table/studentregistration"
+
 provider:
   name: aws
   runtime: python3.8
@@ -21,7 +25,18 @@ resources:
     StudentThrottleQueue:
       Type: "AWS::SQS::Queue"
       Properties:
-        QueueName: "student_reg_throttle"        
+        QueueName: "student_reg_throttle"  
+    StudentsTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        TableName: studentregistration
+        AttributeDefinitions:
+          - AttributeName: student_id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: student_id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST  # On-Demand capacity          
 
 functions:
   apigateway_endpoint:
@@ -33,7 +48,9 @@ functions:
     events:
       - http:
           path: /students/registration/details
-          method: post  
+          method: post
+    environment:
+      STUDENT_TABLE_NAME: studentregistration
   student_details_from_queue_fn:
     handler: src/lambdas/studentdetailsfromqueue.lambda_handler
     name: "student_details_from_queue_fn"
@@ -56,6 +73,8 @@ functions:
      description: "stepfunction lambda"
      memorySize: 2048
      timeout: 10  # 3 minutes
+     environment:
+      STUDENT_TABLE_NAME: studentregistration
 stepFunctions:
   stateMachines:
     STMachineSM:
