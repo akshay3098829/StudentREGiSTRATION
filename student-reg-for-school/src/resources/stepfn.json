@@ -9,8 +9,9 @@
           "Payload.$": "$",
           "FunctionName": "arn:aws:lambda:ap-south-1:533267073332:function:admission-process-lambda"
         },
+        "ResultPath": "$.dob_result",
         "End": true
       }
     }
-  }
+}
   
